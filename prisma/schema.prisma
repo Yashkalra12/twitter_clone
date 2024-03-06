@@ -20,4 +20,14 @@ model User {
   username  String @unique
   email     String @unique
   password  String
+  tweet Tweet[]
 }
+
+model Tweet{
+  id           Int       @id @default(autoincrement())
+  title         String
+  content       String   
+  userid Int
+  user User    @relation(fields: [userid], references: [id])
+}
+

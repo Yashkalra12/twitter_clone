@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
+const auth_1 = require("../utils/auth");
 const prisma = new client_1.PrismaClient();
 const router = express_1.default.Router();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,4 +28,48 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(user);
     res.send("User added");
 }));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let users = yield prisma.user.findMany();
+    res.send({ users });
+}));
+router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    let user = yield prisma.user.findUnique({
+        where: {
+            id: Number(id)
+        }
+    });
+    res.send({ user });
+}));
+router.get("/:username", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { username } = req.body;
+    let users = yield prisma.user.findMany({
+        where: {
+            OR: [
+                {
+                    firstname: {
+                        contains: username
+                    },
+                    lastname: {
+                        contains: username
+                    }
+                }
+            ]
+        }
+    });
+    console.log({ users });
+}));
+router.delete("/:id", auth_1.verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.body;
+    if (id != req.user.id)
+        return res.send("not a valid request");
+    let result = yield prisma.user.delete({
+        where: {
+            id
+        }
+    });
+    res.send("user deleted");
+}));
+router.put("/:id", auth_1.verifyToken, (req, res) => {
+});
 exports.default = router;

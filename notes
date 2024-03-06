@@ -41,3 +41,22 @@ Put("/user/:id") <- Update User Info -->Protect this Route implement JWT
 
 Frontent----> Post(Req.body)---->Server
 will destructure all data from req.body
+
+
+
+req.body(__) ---> if getting from frontend
+req.params.____(___) ->>for api call
+
+
+
+
+6 March
+
+Defining model of tweet
+
+get
+delete
+post
+put
+tweet Routes
+
