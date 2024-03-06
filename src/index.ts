@@ -1,5 +1,8 @@
 import express from "express";
 import userRoute from "./routes/user";
+import loginRoute from "./routes/login";
+import cookieParser from "cookie-parser";
+
 const app=express();
 const PORT=5430;
 
@@ -12,6 +15,7 @@ app.get("/",(req,res)=>{
 
 //routes
 app.use("/user", userRoute);
+app.use("/login",loginRoute);
 app.listen(PORT,()=>{
     console.log(`http://localhost:${PORT}`)
 })

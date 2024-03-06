@@ -11,11 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.10.2",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.0",
     "prisma": "^5.10.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21"
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6"
   }
 }
