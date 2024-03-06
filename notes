@@ -1,3 +1,6 @@
+Yash Kalra 2110991578
+AFS Classwork
+
 Folder Structure
 
 *views
@@ -5,41 +8,36 @@ Folder Structure
 *routes
 *model
 *middleware - Function on requests
-*utils -  Helper functions for the application.
+*utils - Helper functions for the application.
 Example: Nodemailer, Generating a token
 
 index.js file
 
 views not in src folder coz it is being searched by default in the parent folder.
 
-
 Difference between dependency and dev dependency it only for development
 doest go for production
-
 
 Twitter Clone
 --> User --> Tweet
 
 User Model{
-    id
-    firstName
-    LastName
-    Email
-    Password
-    Username
+id
+firstName
+LastName
+Email
+Password
+Username
 }
 
-After Making Model 
+After Making Model
 Will have to create a route in that resources
 Post("/user/") <-Add User
-Get("/user/")  <- Show all User     -->Check Logged in 
-Delete("/user/:id") <- Remove User  --> Token Verify Protect
-Get("/user/:username")<- Get user with username  --> Check logged In
+Get("/user/") <- Show all User -->Check Logged in
+Delete("/user/:id") <- Remove User --> Token Verify Protect
+Get("/user/:username")<- Get user with username --> Check logged In
 Get("/user/:id")<- Get User after getting the username -->
-Put("/user/:id") <- Update User Info  -->Protect  this Route implement JWT
-
-
-
+Put("/user/:id") <- Update User Info -->Protect this Route implement JWT
 
 Frontent----> Post(Req.body)---->Server
 will destructure all data from req.body
