@@ -74,3 +74,6 @@ Model of Like
 Instead to writing route property we can add unique in model 
 to check user has already liked or not
 
+
+Have to make comment functionality
+
