@@ -14,20 +14,30 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   firstname String
   lastname  String
-  username  String @unique
-  email     String @unique
+  username  String  @unique
+  email     String  @unique
   password  String
-  tweet Tweet[]
+  like      Like[]
+  tweet     Tweet[]
 }
 
-model Tweet{
-  id           Int       @id @default(autoincrement())
-  title         String
-  content       String   
-  userid Int
-  user User    @relation(fields: [userid], references: [id])
+model Tweet {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  userid  Int
+  likeCount Int @default(0)
+  like    Like[]
+  user    User   @relation(fields: [userid], references: [id], onDelete: Cascade)
 }
 
+model Like {
+  id      Int   @id @default(autoincrement())
+  userid  Int
+  tweetid Int
+  user    User  @relation(fields: [userid], references: [id], onDelete: Cascade)
+  tweet   Tweet @relation(fields: [tweetid], references: [id], onDelete: Cascade)
+}

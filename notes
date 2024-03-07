@@ -54,9 +54,23 @@ req.params.____(___) ->>for api call
 
 Defining model of tweet
 
-get
-delete
+"/tweet/" -->tweet add
+get ->"/tweet/ --> get all tweet
+delete-> "/tweets/:id" 
 post
 put
 tweet Routes
+
+Transaction in SQL
+to avoid transaction 
+will add ondelete:cascade
+
+
+
+Add feature ->Like
+Model of Like
+
+
+Instead to writing route property we can add unique in model 
+to check user has already liked or not
 

@@ -42,7 +42,7 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     res.send({ user });
 }));
 router.get("/:username", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username } = req.body;
+    const username = req.params.username;
     let users = yield prisma.user.findMany({
         where: {
             OR: [
@@ -60,12 +60,12 @@ router.get("/:username", (req, res) => __awaiter(void 0, void 0, void 0, functio
     console.log({ users });
 }));
 router.delete("/:id", auth_1.verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.body;
+    const id = req.params.id;
     if (id != req.user.id)
         return res.send("not a valid request");
     let result = yield prisma.user.delete({
         where: {
-            id
+            id: Number(id)
         }
     });
     res.send("user deleted");

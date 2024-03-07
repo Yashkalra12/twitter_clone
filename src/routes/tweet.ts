@@ -19,5 +19,51 @@ router.post("/",verifyToken,async(req,res)=>{
     res.send({result:result});
 })
 
+router.get("/",verifyToken,async (req,res)=>{
+    let alltweet=await prisma.tweet.findMany({
+       include:{
+           user:true  
+       }
+    });
+    res.send({tweets:alltweet});
+})
+router.get("/:id",(req,res)=>{
+   
+})
+
+router.delete("/:id", verifyToken, async (req, res) => {
+    const { id } = req.params;
+    try {
+        await prisma.tweet.delete({
+            where: {
+                id: parseInt(id)
+            }
+        });
+        res.send({ message: "Tweet deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting tweet:", error);
+        res.status(500).send({ error: "Error deleting tweet" });
+    }
+});
+
+router.put("/:id", verifyToken, async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    try {
+        const updatedTweet = await prisma.tweet.update({
+            where: {
+                id: parseInt(id)
+            },
+            data: {
+                title,
+                content
+            }
+        });
+        res.send({ updatedTweet });
+    } catch (error) {
+        console.error("Error updating tweet:", error);
+        res.status(500).send({ error: "Error updating tweet" });
+    }
+});
 
 export default router
