@@ -42,13 +42,8 @@ Put("/user/:id") <- Update User Info -->Protect this Route implement JWT
 Frontent----> Post(Req.body)---->Server
 will destructure all data from req.body
 
-
-
-req.body(__) ---> if getting from frontend
-req.params.____(___) ->>for api call
-
-
-
+req.body(**) ---> if getting from frontend
+req.params.\_\_**(\_\_\_) ->>for api call
 
 6 March
 
@@ -56,24 +51,20 @@ Defining model of tweet
 
 "/tweet/" -->tweet add
 get ->"/tweet/ --> get all tweet
-delete-> "/tweets/:id" 
+delete-> "/tweets/:id"
 post
 put
 tweet Routes
 
 Transaction in SQL
-to avoid transaction 
+to avoid transaction
 will add ondelete:cascade
-
-
 
 Add feature ->Like
 Model of Like
 
-
-Instead to writing route property we can add unique in model 
+Instead to writing route property we can add unique in model
 to check user has already liked or not
 
-
 Have to make comment functionality
-
+Same as like functionality
