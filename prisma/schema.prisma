@@ -22,6 +22,7 @@ model User {
   password  String
   like      Like[]
   tweet     Tweet[]
+  reTweets Retweet[]
 }
 
 model Tweet {
@@ -30,7 +31,9 @@ model Tweet {
   content String
   userid  Int
   likeCount Int @default(0)
+  retweetCount Int @default(0)
   like    Like[]
+  reTweets Retweet[]
   user    User   @relation(fields: [userid], references: [id], onDelete: Cascade)
 }
 
@@ -40,4 +43,13 @@ model Like {
   tweetid Int
   user    User  @relation(fields: [userid], references: [id], onDelete: Cascade)
   tweet   Tweet @relation(fields: [tweetid], references: [id], onDelete: Cascade)
+}
+
+model Retweet{
+  id Int @id @default(autoincrement())
+  userid Int
+  tweetid Int
+  user User @relation(fields: [userid],references: [id], onDelete: Cascade)
+  tweet Tweet @relation(fields: [tweetid],references: [id], onDelete: Cascade) 
+
 }

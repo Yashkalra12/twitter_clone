@@ -4,6 +4,7 @@ import loginRoute from "./routes/login";
 import cookieParser from "cookie-parser";
 import TweetRoute  from "./routes/tweet";
 import likeRoute from "./routes/like";
+import retweetRoute from "./routes/retweet";
 
 const app=express();
 const PORT=5430;
@@ -20,6 +21,7 @@ app.use("/user", userRoute);
 app.use("/login",loginRoute);
 app.use("/tweet",TweetRoute);
 app.use("/like",likeRoute);
+app.use("/retweet",retweetRoute);
 app.listen(PORT,()=>{
     console.log(`http://localhost:${PORT}`)
 })
