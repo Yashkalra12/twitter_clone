@@ -98,7 +98,7 @@ function updateTweet(req, res) {
 exports.default = {
     createTweet,
     getAllTweets,
-    getTweetById, // Implement this function
+    getTweetById,
     deleteTweet,
     updateTweet
 };
