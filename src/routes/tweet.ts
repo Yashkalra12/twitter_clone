@@ -1,13 +1,70 @@
 import express from "express";
-const verifyToken = require("../utils/auth").verifyToken;
-const { createTweet, getAllTweets, getTweetById, deleteTweet, updateTweet } = require("./tweet.controller");
+import { PrismaClient } from '@prisma/client'
+import { verifyToken } from "../utils/auth";
+const prisma = new PrismaClient()
+const router= express.Router();
+router.post("/:tweetid",verifyToken,async(req,res)=>{
+     const {tweetid}  = req.params
+     const userid= req.user.id;
+    
+     let retweeted = await prisma.retweet.findFirst({
+        where:{
+          tweetid: Number(tweetid),
+          userid: userid
+        }
+     })   
+     if(retweeted!=null){
+       return res.send({alredyretweeted:true});
+     }
+     let result=await prisma.retweet.create({
+        data:{
+            tweetid:Number(tweetid),
+            userid:userid
+        }
+     })
+     await prisma.tweet.update({
+        where:{
+            id:Number(tweetid)
+        },
+        data:{
+            retweetCount:{increment:1}
+        }
+     })
+     res.send({result});
 
-const router = express.Router();
+})
+router.delete("/:tweetid",verifyToken,async(req,res)=>{
+    const {tweetid} = req.params
+    const userid = req.user.id
+   let retweet = await prisma.retweet.findFirst({
+          where:{
+            tweetid:Number(tweetid),
+            userid:userid
+          }
+   })
+   if(retweet!=null){
+    let response=await prisma.retweet.delete({
+        where:{
+           id:Number(tweetid),
+           userid:userid
+        }
+        })
+         await prisma.tweet.update({
+            where:{
+                id: response.tweetid
+            },
+            data:{
+                retweetCount:{decrement:1}
+            }
+        })
+        res.send({undo:true})
+    }
 
-router.post("/", verifyToken, createTweet);
-router.get("/", verifyToken, getAllTweets);
-router.get("/:id", verifyToken, getTweetById); // Update route handler
-router.delete("/:id", verifyToken, deleteTweet);
-router.put("/:id", verifyToken, updateTweet);
+    res.send("retweet does not exist");
+   
+ 
 
-export default router;
+})
+
+
+export default router
