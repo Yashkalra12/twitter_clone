@@ -1,0 +1,73 @@
+React
+
+SPA->Single Page Application
+    Only component in the page changes and renders
+
+To Conside only two things:
+1)-State         2)-Component  
+
+//What is State
+-Data that can change over time.
+-It's stored inside of a special object
+called state, which belongs to a specific component
+//How do we access our data from the  state?
+-Using this.state
+
+//What is a Component?
+-React application is built up by many individual  components
+-Each component has its own job (what it does)
+-They are like building blocks
+
+//Lifecycle Methods
+-There are different points in the life cycle of a component
+-Methods get called at these points
+
+//Example Code
+class MyApp extends React.Component {
+    constructor(props){
+        super(props); //calls the parent class constructor
+        this.state = {data:"Hello World"};
+    }
+    
+    render(){
+        return <h1>{this.state  .data}</h1>
+    }
+}
+
+//render() method
+-This is where you tell react what should be on the screen
+-Only thing that needs to happen here is rendering HTML/CSS
+-Can use any JSX syntax
+
+//Updating the State
+-We cannot directly modify the state. We need to use setState()
+-setState() takes an object as an argument   and merges it with the current state
+-You can also pass a function instead of an object
+-The function will receive the previous state as an argument and returns the new state
+
+
+
+##No need to Do DOM maniplation in React
+##only need to make statevariable and write logic to change statevariable
+
+
+
+
+//When to Use State?
+-Use state when you have some data that changes over time and depends on user interactions or server responses
+-Use state when you have some data that changes over time and you want to keep track of that information inside your app
+-Use state when you have some data that changes over time and depends on user interactions or server responses
+
+
+
+
+Create
+1)State Varibale
+2)Provide State to Component
+3)Change state logic
+
+Hooks
+useState
+useEffect
+useContext
+
